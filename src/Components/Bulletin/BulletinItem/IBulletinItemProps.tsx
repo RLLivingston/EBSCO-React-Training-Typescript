@@ -4,5 +4,4 @@ export interface IBulletinItemProps {
   description: string;
   title: string;
   id: string;
-  url: string | null;
 }

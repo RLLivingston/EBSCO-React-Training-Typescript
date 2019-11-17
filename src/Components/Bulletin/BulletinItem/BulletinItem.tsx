@@ -22,9 +22,7 @@ export default class BulletinItem extends React.Component<IBulletinItemProps> {
             {this.props.votes}
           </div>
           <div className="description">
-            <a href={this.props.url ? this.props.url : "#"}>
-              {this.props.title}
-            </a>
+            <a href={"#"}>{this.props.title}</a>
             <p>{this.props.description}</p>
           </div>
           <div className="extra">
