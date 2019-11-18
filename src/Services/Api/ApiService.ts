@@ -1,7 +1,8 @@
-import IBulletinData from "../ILocalData";
+import IBulletinData from "../IBulletinData";
+import IApiService from "./IApiService";
 
-class ApiService {
-  async getBulletins() {
+class ApiService implements IApiService {
+  async getBulletins(): Promise<IBulletinData[]> {
     const bulletins = await fetch(
       "https://react-app-bulletins1.azurewebsites.net/api/bulletins"
     );
@@ -9,7 +10,10 @@ class ApiService {
     return bulletins.json();
   }
 
-  async patchUpvotes(bulletinId: string, patchBody: IBulletinData) {
+  async patchUpvotes(
+    bulletinId: string,
+    patchBody: IBulletinData
+  ): Promise<void> {
     fetch(
       "https://react-app-bulletins1.azurewebsites.net/api/bulletins/" +
         bulletinId,

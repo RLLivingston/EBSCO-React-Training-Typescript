@@ -1,4 +1,4 @@
-import IBulletinData from "./ILocalData";
+import IBulletinData from "./IBulletinData";
 
 const LocalData: IBulletinData[] = [
   {
