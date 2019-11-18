@@ -5,9 +5,8 @@ class ApiService {
     const bulletins = await fetch(
       "https://react-app-bulletins1.azurewebsites.net/api/bulletins"
     );
-    const toJson = bulletins.json();
 
-    return toJson;
+    return bulletins.json();
   }
 
   async patchUpvotes(bulletinId: string, patchBody: IBulletinData) {
