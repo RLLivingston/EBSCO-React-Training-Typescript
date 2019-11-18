@@ -1,5 +1,7 @@
 import IBulletinData from "./IBulletinData";
 
+const apiUrl = "https://react-app-bulletins1.azurewebsites.net/api/bulletins";
+
 const LocalData: IBulletinData[] = [
   {
     id: "b9277c30-8989-4f11-a005-437fc7854247",
