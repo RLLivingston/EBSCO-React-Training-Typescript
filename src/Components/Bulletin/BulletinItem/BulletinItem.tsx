@@ -8,6 +8,10 @@ const BulletinItem: React.FC<IBulletinItemProps> = (props) => {
         props.upvote(props.id);
     }
 
+    const removeBulletin = () => {
+        props.remove(props.id);
+    }
+
     return(
         <div className="item">
             <div className="image">
@@ -29,6 +33,7 @@ const BulletinItem: React.FC<IBulletinItemProps> = (props) => {
                     <img className="ui avatar image" src={avatarImage} alt="Avatar" />
                 </div>
             </div>
+            <button onClick={removeBulletin}>X</button>
         </div>
     )
 }

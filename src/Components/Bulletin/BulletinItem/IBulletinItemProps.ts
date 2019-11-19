@@ -4,4 +4,5 @@ export default interface IBulletinItemProps {
     title: string;
     id: string;
     upvote: (bulletinId: string) => void;
+    remove: (bulletinId: string) => void;
 }

@@ -1,10 +1,16 @@
 import IBulletinData from "../IBulletinData";
+import IBulletinStore from "../../Stores/Bulletin/IBulletinStore";
+import { bulletinStore } from "../../Stores/Bulletin/BulletinStore";
 
 class ApiService {
-    async getBulletins(): Promise<IBulletinData[]> {
+    constructor(private readonly bulletinStore: IBulletinStore) {}
+
+    async getBulletins(): Promise<void> {
         const bulletins = await fetch("https://react-app-bulletins1.azurewebsites.net/api/bulletins");
 
-        return bulletins.json();
+        const formattedBulletins = await bulletins.json();
+
+        this.bulletinStore.addBulletins(formattedBulletins);
     }
 
     async patchVotes(bulletinId: string, patchBody: IBulletinData): Promise<void> {
@@ -16,6 +22,14 @@ class ApiService {
             }
         })
     }
+
+    removeBulletin(bulletinId: string) {
+        this.bulletinStore.removeBulletin(bulletinId);
+    }
+
+    rollbackBulletins(previousBulletins: IBulletinData[]): void {
+        this.bulletinStore.rollback(previousBulletins);
+    }
 }
 
-export default new ApiService();
+export default new ApiService(bulletinStore);
