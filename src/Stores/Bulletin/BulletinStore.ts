@@ -1,7 +1,7 @@
 import IBulletinData from "../../Services/IBulletinData";
 import { observable, action, computed } from "mobx";
 
-class BulletinStore {
+export class BulletinStore {
   @observable bulletins: IBulletinData[] = [];
 
   @computed
@@ -13,12 +13,7 @@ class BulletinStore {
   public addBulletins(bulletinsToAdd: IBulletinData[]): void {
     this.bulletins = bulletinsToAdd;
   }
-
-  @action
-  public addBulletin(newBulletin: IBulletinData): void {
-    this.bulletins.push(newBulletin);
-  }
-
+  
   @action
   public removeBulletin(bulletinId: string): void {
     this.bulletins = this.bulletins.filter(b => {
@@ -41,6 +36,4 @@ class BulletinStore {
   }
 }
 
-const bulletinStore = new BulletinStore();
-
-export default bulletinStore;
+export const bulletinStore = new BulletinStore();

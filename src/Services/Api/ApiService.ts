@@ -1,7 +1,7 @@
 import IBulletinData from "../IBulletinData";
 import IApiService from "./IApiService";
 import IBulletinStore from "../../Stores/Bulletin/IBulletinStore";
-import bulletinStore from "../../Stores/Bulletin/BulletinStore";
+import {bulletinStore} from "../../Stores/Bulletin/BulletinStore";
 
 class ApiService implements IApiService {
   constructor(private readonly bulletinStore: IBulletinStore) {}

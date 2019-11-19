@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "mobx-react";
-import bulletinStore from "./Stores/Bulletin/BulletinStore";
+import {bulletinStore} from "./Stores/Bulletin/BulletinStore";
 
 ReactDOM.render(
   <Provider bulletinStore={bulletinStore}>
