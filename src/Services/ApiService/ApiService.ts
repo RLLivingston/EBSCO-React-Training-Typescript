@@ -7,9 +7,7 @@ class ApiService {
 
     async getBulletins(): Promise<void> {
         const bulletins = await fetch("https://react-app-bulletins1.azurewebsites.net/api/bulletins");
-
         const formattedBulletins = await bulletins.json();
-
         this.bulletinStore.addBulletins(formattedBulletins);
     }
 

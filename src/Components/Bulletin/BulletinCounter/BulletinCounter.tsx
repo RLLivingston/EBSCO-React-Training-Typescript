@@ -1,5 +1,6 @@
 import React from "react";
 import IBulletinCounter from "./IBulletinCounterProps";
+import { observer } from "mobx-react";
 
 const BulletinCounter: React.FC<IBulletinCounter> = (props) => {
     const bulletinCount = props.bulletinStore.bulletinCount;
@@ -8,4 +9,4 @@ const BulletinCounter: React.FC<IBulletinCounter> = (props) => {
     )
 }
 
-export default BulletinCounter;
+export default observer(BulletinCounter);

@@ -4,6 +4,7 @@ import BulletinItem from "../BulletinItem/BulletinItem"
 import IBulletinListState from "./IBulletinListState"
 import ApiService from "../../../Services/ApiService/ApiService"
 import IBulletinListProps from "./IBulletinListProps"
+import {observer} from 'mobx-react';
 
 const BulletinList: React.FC<IBulletinListProps> = (props) => {
     const bulletinStore = props.bulletinStore;
@@ -87,4 +88,4 @@ const BulletinList: React.FC<IBulletinListProps> = (props) => {
     return <div>Loading...</div>
 }
 
-export default BulletinList;
+export default observer(BulletinList);
