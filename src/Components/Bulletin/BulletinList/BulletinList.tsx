@@ -73,15 +73,15 @@ const BulletinList: React.FC = () => {
             <div id="content">
             <div className="ui unstackable items">
                 {listState.items.sort((itemOne, itemTwo) => itemTwo.votes - itemOne.votes).map((item) => {
-                        return <BulletinItem
-                            key={"bulletin-" + item.id}
-                            description={item.description}
-                            id={item.id}
-                            title={item.title}
-                            votes={item.votes}
-                            upvote={handleUpVote}
-                        />
-                    })}
+                  return <BulletinItem
+                      key={"bulletin-" + item.id}
+                      description={item.description}
+                      id={item.id}
+                      title={item.title}
+                      votes={item.votes}
+                      upvote={handleUpVote}
+                  />
+                })}
             </div>
             </div>
         </div>
