@@ -1,5 +1,7 @@
 import IBulletinData from "../../Services/IBulletinData";
-import { observable, action, computed } from "mobx";
+import { observable, action, computed, configure } from "mobx";
+
+configure({ enforceActions: "always" });
 
 export class BulletinStore {
   @observable bulletins: IBulletinData[] = [];
