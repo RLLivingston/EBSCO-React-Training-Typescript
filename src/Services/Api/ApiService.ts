@@ -38,6 +38,10 @@ class ApiService implements IApiService {
   rollbackBulletins(rollback: IBulletinData[]) {
     this.bulletinStore.rollback(rollback);
   }
+
+  removeBulletin(bulletinId: string) {
+    this.bulletinStore.removeBulletin(bulletinId);
+  }
 }
 
 export default new ApiService(bulletinStore);

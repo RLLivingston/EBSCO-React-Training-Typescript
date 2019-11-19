@@ -5,29 +5,29 @@ class BulletinStore {
   @observable bulletins: IBulletinData[] = [];
 
   @computed
-  public get bulletinCount() {
+  public get bulletinCount(): number {
     return this.bulletins.length;
   }
 
   @action
-  public addBulletins(bulletinsToAdd: IBulletinData[]) {
+  public addBulletins(bulletinsToAdd: IBulletinData[]): void {
     this.bulletins = bulletinsToAdd;
   }
 
   @action
-  public addBulletin(newBulletin: IBulletinData) {
+  public addBulletin(newBulletin: IBulletinData): void {
     this.bulletins.push(newBulletin);
   }
 
   @action
-  public removeBulletin(bulletinId: string) {
+  public removeBulletin(bulletinId: string): void {
     this.bulletins = this.bulletins.filter(b => {
       return b.id !== bulletinId;
     });
   }
 
   @action
-  public updateBulletin(bulletinId: string, patchData: IBulletinData) {
+  public updateBulletin(bulletinId: string, patchData: IBulletinData): void {
     this.bulletins = this.bulletins.filter(b => {
       return b.id !== bulletinId;
     });
@@ -36,7 +36,7 @@ class BulletinStore {
   }
 
   @action
-  public rollback(bulletins: IBulletinData[]) {
+  public rollback(bulletins: IBulletinData[]): void {
     this.bulletins = bulletins;
   }
 }

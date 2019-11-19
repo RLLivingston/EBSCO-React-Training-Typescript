@@ -2,6 +2,7 @@ import IBulletinData from "../../Services/IBulletinData";
 
 export default interface IBulletinStore {
   bulletins: IBulletinData[];
+  bulletinCount: number;
   addBulletins: (bulletinsToAdd: IBulletinData[]) => void;
   addBulletin: (newBulletin: IBulletinData) => void;
   removeBulletin: (bulletinId: string) => void;

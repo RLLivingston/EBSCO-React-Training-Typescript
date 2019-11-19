@@ -32,6 +32,10 @@ const BulletinList: React.FC<IBulletinListProps> = props => {
     }
   };
 
+  const removeBulletin = (bulletinId: string) => {
+    ApiService.removeBulletin(bulletinId);
+  };
+
   const handleUpVote = (bulletinId: string) => {
     const previousBulletins = bulletinStore.bulletins;
     const patchBody = bulletinStore.bulletins.find(x => x.id === bulletinId);
@@ -64,6 +68,7 @@ const BulletinList: React.FC<IBulletinListProps> = props => {
                     description={item.description}
                     votes={item.votes}
                     upvote={handleUpVote}
+                    remove={removeBulletin}
                   />
                 );
               })}

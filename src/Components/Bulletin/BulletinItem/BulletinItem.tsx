@@ -8,6 +8,10 @@ export default class BulletinItem extends React.Component<IBulletinItemProps> {
     this.props.upvote(this.props.id);
   };
 
+  removeBulletin = () => {
+    this.props.remove(this.props.id);
+  };
+
   render() {
     return (
       <div className="item">
@@ -30,6 +34,7 @@ export default class BulletinItem extends React.Component<IBulletinItemProps> {
             <img className="ui avatar image" src={avatarImage} alt="Avatar" />
           </div>
         </div>
+        <button onClick={this.removeBulletin}>X</button>
       </div>
     );
   }
