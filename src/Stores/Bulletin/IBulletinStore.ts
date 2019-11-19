@@ -1,0 +1,10 @@
+import IBulletinData from "../../Services/IBulletinData";
+
+export default interface IBulletinStore {
+  bulletins: IBulletinData[];
+  addBulletins: (bulletinsToAdd: IBulletinData[]) => void;
+  addBulletin: (newBulletin: IBulletinData) => void;
+  removeBulletin: (bulletinId: string) => void;
+  updateBulletin: (bulletinId: string, patchData: IBulletinData) => void;
+  rollback: (bulletins: IBulletinData[]) => void;
+}

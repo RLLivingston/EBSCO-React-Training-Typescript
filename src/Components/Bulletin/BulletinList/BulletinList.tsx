@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from "react";
-import LocalData from "../../../Services/LocalData";
 import BulletinItem from "../BulletinItem/BulletinItem";
 import IBulletinListState from "./IBulletinListState";
 import ApiService from "../../../Services/Api/ApiService";
+import { observer } from "mobx-react";
+import IBulletinListProps from "./IBulletinListProps";
 
-const BulletinList: React.FC = () => {
+const BulletinList: React.FC<IBulletinListProps> = props => {
+  const bulletinStore = props.bulletinStore;
   const [listState, setListState] = useState<IBulletinListState>({
     error: null,
-    isLoaded: false,
-    items: []
+    isLoaded: false
   });
 
   useEffect(() => {
-    // setListState({
-    //   items: LocalData,
-    //   error: null,
-    //   isLoaded: true
-    // });
-
     loadData();
   }, []);
 
   const loadData = async () => {
     try {
-      const bulletins = await ApiService.getBulletins();
+      await ApiService.getBulletins();
+
       setListState({
-        items: bulletins,
         error: null,
         isLoaded: true
       });
     } catch (err) {
       setListState({
-        items: [],
         error: err,
         isLoaded: false
       });
@@ -39,36 +33,15 @@ const BulletinList: React.FC = () => {
   };
 
   const handleUpVote = (bulletinId: string) => {
-    const previousBulletins = listState.items;
-    const updatedBulletins = listState.items.map(item => {
-      if (item.id === bulletinId) {
-        return Object.assign(
-          {},
-          {
-            title: item.title,
-            description: item.description,
-            id: item.id,
-            votes: item.votes + 1
-          }
-        );
-      } else {
-        return item;
-      }
-    });
-
-    setListState({
-      items: updatedBulletins,
-      error: null,
-      isLoaded: true
-    });
-
-    const patchBody = updatedBulletins.find(x => x.id === bulletinId);
+    const previousBulletins = bulletinStore.bulletins;
+    const patchBody = bulletinStore.bulletins.find(x => x.id === bulletinId);
+    patchBody!.votes += 1;
 
     try {
       ApiService.patchUpvotes(bulletinId, patchBody!);
     } catch (err) {
+      ApiService.rollbackBulletins(previousBulletins);
       setListState({
-        items: previousBulletins,
         error: err,
         isLoaded: true
       });
@@ -80,7 +53,7 @@ const BulletinList: React.FC = () => {
       <div className="main ui text container">
         <div id="content">
           <div className="ui unstackable items">
-            {listState.items
+            {bulletinStore.bulletins
               .sort((a, b) => b.votes - a.votes)
               .map(item => {
                 return (
@@ -103,4 +76,4 @@ const BulletinList: React.FC = () => {
   return <div>{listState.isLoaded ? itemRender() : <div>Loading...</div>}</div>;
 };
 
-export default BulletinList;
+export default observer(BulletinList);

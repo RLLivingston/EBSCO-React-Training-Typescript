@@ -1,13 +1,19 @@
 import IBulletinData from "../IBulletinData";
 import IApiService from "./IApiService";
+import IBulletinStore from "../../Stores/Bulletin/IBulletinStore";
+import bulletinStore from "../../Stores/Bulletin/BulletinStore";
 
 class ApiService implements IApiService {
-  async getBulletins(): Promise<IBulletinData[]> {
+  constructor(private readonly bulletinStore: IBulletinStore) {}
+
+  async getBulletins(): Promise<void> {
     const bulletins = await fetch(
       "https://react-app-bulletins1.azurewebsites.net/api/bulletins"
     );
 
-    return bulletins.json();
+    const json = await bulletins.json();
+
+    this.bulletinStore.addBulletins(json);
   }
 
   async patchUpvotes(
@@ -25,7 +31,13 @@ class ApiService implements IApiService {
         }
       }
     );
+
+    this.bulletinStore.updateBulletin(bulletinId, patchBody);
+  }
+
+  rollbackBulletins(rollback: IBulletinData[]) {
+    this.bulletinStore.rollback(rollback);
   }
 }
 
-export default new ApiService();
+export default new ApiService(bulletinStore);
